@@ -1,4 +1,4 @@
-(ns clojush.problems.ec-ai-demos.cube-surface
+(ns clojush.problems.Mitchell.Chocolate
   (:use [clojush.pushgp.pushgp]
         [clojush.random]
         [clojush pushstate interpreter]
@@ -37,7 +37,7 @@
 (defn expected-output
   [inputs]
   (let [[small big goal] inputs]
-    (if (>= (+ (* big 5) small) goal) true -1)))
+    (if (>= (+ (* big 5) small) goal) true false)))
 
 (expected-output [4, 1, 10])
 
@@ -49,3 +49,39 @@
             (push-item input :input state))
           (make-push-state)
           inputs))
+
+
+; The only part of this you'd need to change is
+; which stack(s) the return value(s) come from.
+(defn actual-output
+  [program inputs]
+  (let [start-state (make-start-state inputs)
+        end-state (run-push program start-state)
+        top-int (top-item :boolean end-state)]
+    top-int))
+
+
+(defn all-errors
+  [program]
+  (doall
+    (for [inputs input-set]
+      (let [expected (expected-output inputs)
+            actual (actual-output program inputs)]
+        (if (= expected actual)
+          0
+          1)))))
+
+(def atom-generators
+  (concat
+    ; Include all the instructions that act on integers and booleans
+    ; Could have :exec here, but I just am limiting things to exec-if
+    (registered-for-stacks [:integer :integer :integer])
+    (list 'exec_if)
+     ; The three inputs
+    (list 'in1 'in2 'in3)))
+
+(def argmap
+  {:error-function all-errors
+   :atom-generators atom-generators
+   :population-size 500
+   })
