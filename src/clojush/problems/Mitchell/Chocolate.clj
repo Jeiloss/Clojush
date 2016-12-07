@@ -37,7 +37,7 @@
 (defn expected-output
   [inputs]
   (let [[small big goal] inputs]
-    (if (>= (+ (* big 5) small) goal) true false)))
+    (if (>= (+ (* big 5) small) goal) 1 -1)))
 
 (expected-output [4, 1, 10])
 
@@ -57,7 +57,7 @@
   [program inputs]
   (let [start-state (make-start-state inputs)
         end-state (run-push program start-state)
-        top-int (top-item :boolean end-state)]
+        top-int (top-item :integer end-state)]
     top-int))
 
 
