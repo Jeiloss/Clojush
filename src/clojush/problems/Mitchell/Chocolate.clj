@@ -34,12 +34,37 @@
    [7, 2, 13]])
 
 ;; takes an input list, and create an list of expected-output
-(defn expected-output
-  [inputs]
-  (let [[small big goal] inputs]
-    (if (>= (+ (* big 5) small) goal) 1 -1)))
+;; (defn expected-output
+;;   [inputs]
+;;   (let [[small big goal] inputs]
+;;     (if (>= (+ (* big 5) small) goal)
+;;       1
+;;       -1))
+;;   )
 
 (expected-output [4, 1, 10])
+(expected-output [1000, 1000000, 5000006])
+
+;; (loop [i 10 p 4]
+;;   (when (> i 5)
+;;     (println i)
+;;     (println p)
+;;     (recur (dec i)(dec p))))
+(defn expected-output
+  [inputs]
+  (let [[small big goalX] inputs]
+    (if (>= (+ (* big 5) small) goalX)
+      (loop [i small p big goal goalX]
+        (when true
+          (cond
+            (= goal 0) (- small i)
+            (and (<= 5 goal)(> p 0)) (recur i (dec p) (- goal 5))
+            (> i 0) (recur (dec i) p (- goal 1))
+              :else -1
+          )
+    ))
+      -1)))
+
 
 
 ;; From example code.
@@ -61,6 +86,30 @@
     top-int))
 
 
+
+(loop [i 7 p 5 goal 13]
+  (println "goal" goal)
+  (println "p" p)
+  (println "i" i)
+  (when true
+    (cond
+      (= goal 0) 1
+      (and (<= 5 goal)(> p 0)) (recur i (dec p) (- goal 5))
+      (> i 0) (recur (dec i) p (- goal 1))
+      :else -1
+    )
+  ))
+(loop [i 7 p 5 goal 13]
+  (println "goal" goal)
+  (println "p" p)
+  (println "i" i)
+  (when (< 0 goal)
+    (cond
+      (and (<= 5 goal)(> p 0)) (recur i (dec p) (- goal 5))
+      (> i 0) (recur (dec i) p (- goal 1))
+      :else -1
+    )
+  ))
 (defn all-errors
   [program]
   (doall
