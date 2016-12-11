@@ -33,23 +33,9 @@
    [7, 1, 12]
    [7, 2, 13]])
 
-;; takes an input list, and create an list of expected-output
-;; (defn expected-output
-;;   [inputs]
-;;   (let [[small big goal] inputs]
-;;     (if (>= (+ (* big 5) small) goal)
-;;       1
-;;       -1))
-;;   )
 
-(expected-output [4, 1, 10])
-(expected-output [1000, 1000000, 5000006])
 
-;; (loop [i 10 p 4]
-;;   (when (> i 5)
-;;     (println i)
-;;     (println p)
-;;     (recur (dec i)(dec p))))
+
 (defn expected-output
   [inputs]
   (let [[small big goalX] inputs]
@@ -65,7 +51,8 @@
     ))
       -1)))
 
-
+(expected-output [4, 1, 10])
+(expected-output [1000, 1000000, 5000006])
 
 ;; From example code.
 (defn make-start-state
@@ -125,7 +112,7 @@
     ; Include all the instructions that act on integers and booleans
     ; Could have :exec here, but I just am limiting things to exec-if
     (registered-for-stacks [:integer :integer :integer])
-    (list 'exec_if)
+;;     (list 'exec_if)
      ; The three inputs
     (list 'in1 'in2 'in3)))
 
