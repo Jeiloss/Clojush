@@ -74,29 +74,6 @@
 
 
 
-(loop [i 7 p 5 goal 13]
-  (println "goal" goal)
-  (println "p" p)
-  (println "i" i)
-  (when true
-    (cond
-      (= goal 0) 1
-      (and (<= 5 goal)(> p 0)) (recur i (dec p) (- goal 5))
-      (> i 0) (recur (dec i) p (- goal 1))
-      :else -1
-    )
-  ))
-(loop [i 7 p 5 goal 13]
-  (println "goal" goal)
-  (println "p" p)
-  (println "i" i)
-  (when (< 0 goal)
-    (cond
-      (and (<= 5 goal)(> p 0)) (recur i (dec p) (- goal 5))
-      (> i 0) (recur (dec i) p (- goal 1))
-      :else -1
-    )
-  ))
 (defn all-errors
   [program]
   (doall
