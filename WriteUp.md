@@ -10,9 +10,11 @@ We liked how deceptively easy the problem appears. There were a few local optima
 The program did end up reaching a solution.
 
 Before -and after- the goal was reached, there was quite a few failed attempts.
-  One of the attempts involved deleting the atom-generators function.
-    This resulted in the generations floundering about, not getting more than one correct answer through 5000 generations.
-  Small poulation sizes(0- 180) are almost guaranteed to fail up to the 3000 generations tested.
-  The number and type of inputs was important for how many generations it took to solve.
-    The original input-set had 23 tests with most of their solutions leading towards a local optima, and took thousands of generations, if ever, to reach a correct conclusion.
-    When the inputs were stripped down to the six test cases that would test all outcomes, then there the solution was usually reached in under 50 generations.
+------
+
+* One of the attempts involved deleting the atom-generators function.
+  * This resulted in a population of 650 to flounder about, not getting more than one correct answer through 5000 generations.
+* Small population sizes(0- 180) are almost guaranteed to fail up on the test cases.
+* The number and type of inputs was important for how many generations it took to solve.
+  * The original input-set had 23 tests with most of their solutions leading towards a local optima, and took thousands of generations, if ever, to reach a correct conclusion.
+  * When the inputs were stripped down to six test cases -one for each possible outcome, then there the solution was usually reached in under 50 generations.
